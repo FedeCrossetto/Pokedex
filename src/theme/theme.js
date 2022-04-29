@@ -19,7 +19,8 @@ export default extendTheme({
       secondary: "#636CBB",
       tertiary: "#9b9c9e",
       dark:"#1a202c",
-      light:"#ffffff"
+      light:"#f6f8fc",
+      white:"#ffffff"
     },
   },
   components: {
