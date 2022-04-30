@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <ChakraProvider theme={theme} >
-      <Box bg="brand.background" w="100vw" h="100vh"> 
+      <Box bg="brand.background" width="100vw" height="100vh"> 
       <Navbar />
         <Router>
           <Routes>
