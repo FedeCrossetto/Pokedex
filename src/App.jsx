@@ -10,11 +10,10 @@ import theme from "./theme/theme";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const isDark = false;
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme} >
+      <Box bg="brand.background" w="100vw" h="100vh"> 
       <Navbar />
-      <Box >
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
