@@ -13,14 +13,13 @@ export default extendTheme({
   },
   colors: {
     brand: {
-      // primary: "#FF6902",
-      // secondary: "#FD1F55",
-      primary: "#48FE9D",
-      secondary: "#636CBB",
-      tertiary: "#9b9c9e",
+      primary:"#FD1F55",
+      secondary: "#FF5350",
+      tertiary: "#797876",
       dark:"#1a202c",
-      light:"#f6f8fc",
-      white:"#ffffff"
+      light:"#ffffff",
+      background:"#f6f8fc",
+      transparent:"#f2f2f2"
     },
   },
   components: {
