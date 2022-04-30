@@ -77,8 +77,7 @@ export const Navbar = () => {
         {display && Links.map((link) =>
           <a href={link.href} key={link.nombre} >
             <GridItem w='100%' h='14' bg='brand.light' icon={link.icon} pl="1.5rem"
-              _hover={{
-                // color: isDark? "brand.primary": "brand.secondary",
+              _hover={{             
                 textDecoration: "underline",
                 textDecorationThickness: "4px",
                 textDecorationColor: "brand.primary",

@@ -6,7 +6,7 @@ export const CardPokemon = ({url}) => {
     const state = UseFetch(url)
     const {loading,data} = state
   
-    loading?console.log('loading'):console.log(data.results)
+    loading?console.log('loading'):console.log('Desde CardPokemon',data.results)
     return (
         <Container>
           {loading}?
