@@ -51,7 +51,7 @@ export const Pokedex = () => {
                 <Button h="2rem" mt="1rem" ml="1rem" variant='outline' colorScheme='teal' rightIcon={<ArrowForwardIcon />} onClick={() => NextPage(paginate + page)}>Next</Button>
               </Box>
               <Box>
-              <CardInfo results={data.results}/>
+              {/* <CardInfo results={data.results}/> */}
               </Box>
           </HStack>
       }
