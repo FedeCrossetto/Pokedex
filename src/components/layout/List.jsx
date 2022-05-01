@@ -22,8 +22,9 @@ export const List = ({ url }) => {
         !loading&&
         <Flex justify="left">
         <Button boxShadow="lg" 
-             h='5rem' 
-             w='48rem' px="2rem" 
+             h={["2rem", "3rem", "4rem", "5rem"]} 
+             w={["12rem", "24rem", "36rem", "48rem"]}
+             px="2rem" 
              py="0.5rem"
              borderRadius="2xl" 
              bg="brand.light" 
@@ -35,16 +36,16 @@ export const List = ({ url }) => {
                 {/* <Image src={'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/' + sortOrder(data.id) + '.png'}
                      boxSize="5rem" /> */}
                      <Image src={data.sprites.front_default}
-                     boxSize="5rem"
+                     boxSize={["2rem", "3rem", "4rem", "5rem"]}
                      pos="absolute"
                      left="1rem" />
-                <VStack pos="absolute"  left="6rem">
+                <VStack pos="absolute"  left={["3rem", "3rem", "4rem", "6rem"]}>
                     <Text fontSize="sm" fontWeight={600}>{data.forms[0].name}</Text>
                     <Text fontSize="xs">#{sortOrder(data.id)}</Text>
                 </VStack>
                 <VStack>
                     <HStack fontSize="xs">
-                        {data.types.map(t =>(<Box bg={'brand.'+t.type.name} borderRadius="md" py="6px" px="12px" ml="24rem" color="brand.black">{t.type.name}</Box>))}                                         
+                        {data.types.map(t =>(<Box bg={'brand.'+t.type.name} borderRadius="md" py={["2px", "3px", "4px", "6px"]} px={["2px", "6px", "8px", "12px"]} ml={["14rem", "16rem", "20rem", "24rem"]} color="brand.black">{t.type.name}</Box>))}                                         
                     </HStack>
                 </VStack>
             </HStack>

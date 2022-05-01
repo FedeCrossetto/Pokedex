@@ -33,7 +33,8 @@ export const Navbar = () => {
         boxShadow={!display && "xl"}
         alignItems="center"
         justifyContent="space-between"
-        pos="fixed"
+        // pos="fixed"
+        pos="absolute"
         my="1rem"
         px="2rem"
         color="brand.tertiary"
