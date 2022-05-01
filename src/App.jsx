@@ -11,8 +11,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <ChakraProvider theme={theme} >
-      <Box bg="brand.background" width="100vw" height="100vh"> 
+    <ChakraProvider theme={theme}>
+      <Box bg="brand.background" width="100%" height="100vh"> 
       <Navbar />
         <Router>
           <Routes>

@@ -9,7 +9,9 @@ export const Cards = ({results}) => {
     <Container>
       {results.map(x=>
         (
-         <List url={x.url}/>
+         <List 
+         key={x.name}
+         url={x.url}/>
          )
         )}
     </Container>
