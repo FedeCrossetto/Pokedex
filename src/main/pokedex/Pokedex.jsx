@@ -8,9 +8,11 @@ import { CardInfo } from '../../components/layout/CardInfo';
 export const Pokedex = () => {
   // const [url,setUrl] = useState('https://www.pokeapi.co/api/v2/pokemon')
   const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10')
-  const state = UseFetch(url)
+  // const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon/bulbasaur')
+  let state = UseFetch(url)
   const [paginate, setPaginate] = useState(0);
   const page = 10;//Setear tamaño de items por página.
+  const [filter,setFilter] = useState(0);
 
   const { loading, data } = state
 
@@ -22,10 +24,22 @@ export const Pokedex = () => {
     setUrl(`https://pokeapi.co/api/v2/pokemon?offset=${val}&limit=${page}`);
     setPaginate(val)
   }
+  console.log('AVER ACA',data)
+  const filterShearch = e =>{
+    setFilter(e.length);
+    // data.results.filter((e)=> e == data.results.name)
+    // setUrl(`https://pokeapi.co/api/v2/pokemon/${e}`);
+    // (e.length === 0) && setUrl(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=10`);
+  }
+
+  // useEffect(() => {
+   
+  // }, [url])
+  
 
   return (
     <Container minWidth={["570px", "767px", "992px", "1200px"]} pt="2rem" color="brand.tertiary">
-      <InputGroup width='36rem' ml="1rem" >
+      <InputGroup width='36rem' ml="1rem" onChange={(e) => filterShearch(e.target.value)} >
         <Input placeholder='Search your Pokémon!' bg="brand.white" />
         <InputRightElement children={<Search2Icon color="brand.primary" />} />
       </InputGroup>
@@ -38,6 +52,8 @@ export const Pokedex = () => {
 
         loading ?
           <Spinner
+            ml="16rem"
+            mt="8rem"
             thickness='4px'
             emptyColor='gray.200'
             color='brand.primary'
@@ -46,12 +62,9 @@ export const Pokedex = () => {
           :
           <HStack pos="absolute">
               <Box>
-              <Cards results={data.results} />
+                <Cards results={data.results}/>
                 <Button h="2rem" mt="1rem" ml="1rem" variant='outline' colorScheme='teal' leftIcon={<ArrowBackIcon />} onClick={() => PreviousPage(paginate - page)} disabled={(paginate <= 0 ? true : false)}>Prev</Button>
                 <Button h="2rem" mt="1rem" ml="1rem" variant='outline' colorScheme='teal' rightIcon={<ArrowForwardIcon />} onClick={() => NextPage(paginate + page)}>Next</Button>
-              </Box>
-              <Box>
-              {/* <CardInfo results={data.results}/> */}
               </Box>
           </HStack>
       }
