@@ -23,13 +23,7 @@ import dark from '../../assets/dark.png'
 export const CardInfo = ({ id, results }) => {
   const state = UseFetch(results)
   const { loading, data } = state;
-  // loading ? console.log('loadingCardInfo') : console.log('Desde CardInfo', data)
 
-  results.types.map(x => console.log(`${x.type.name}`))
-
-  useEffect(() => {
-    console.log('Llegó a CardInfo :', results)
-  }, [results])
 
   const loadElement = e => {
     switch (e) {

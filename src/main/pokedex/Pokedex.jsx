@@ -8,13 +8,16 @@ import { CardInfo } from '../../components/layout/CardInfo';
 export const Pokedex = () => {
   // const [url,setUrl] = useState('https://www.pokeapi.co/api/v2/pokemon')
   const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10')
+  const [allurl, setAllUrl] = useState('https://pokeapi.co/api/v2/pokemon?offset=0&limit=898')
   // const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon/bulbasaur')
   let state = UseFetch(url)
+  let allstate = UseFetch(allurl)
   const [paginate, setPaginate] = useState(0);
   const page = 10;//Setear tamaño de items por página.
   const [filter,setFilter] = useState(0);
-
+  
   const { loading, data } = state
+  const { data :alldata } = allstate
 
   const PreviousPage = (val) => {
     setUrl(`https://pokeapi.co/api/v2/pokemon?offset=${val}&limit=${page}`);
@@ -24,17 +27,14 @@ export const Pokedex = () => {
     setUrl(`https://pokeapi.co/api/v2/pokemon?offset=${val}&limit=${page}`);
     setPaginate(val)
   }
-  console.log('AVER ACA',data)
   const filterShearch = e =>{
-    setFilter(e.length);
-    // data.results.filter((e)=> e == data.results.name)
-    // setUrl(`https://pokeapi.co/api/v2/pokemon/${e}`);
-    // (e.length === 0) && setUrl(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=10`);
+    setFilter(e.length)
+    
+    data.results = data.results.filter((element)=> element.name.includes(e.toLowerCase()))
+    // data.results = alldata.results.filter((element)=> element.name.includes(e.toLowerCase()))
+    
   }
 
-  // useEffect(() => {
-   
-  // }, [url])
   
 
   return (
