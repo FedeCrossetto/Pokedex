@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useContext} from 'react'
 import { UseFetch } from '../../hooks/UseFetch'
 import { Container, Image, Input, InputGroup, InputRightElement, Button,Circle, Tooltip, Select, HStack, VStack, Text, Box, Grid } from '@chakra-ui/react'
+import PokeContext from '../../context/Pokedex/PokeContext';
 import grass from '../../assets/grass.png'
 import poison from '../../assets/poison.png'
 import fire from '../../assets/fire.png'
@@ -20,11 +21,9 @@ import fighting from '../../assets/fighting.png'
 import dragon from '../../assets/dragon.png'
 import dark from '../../assets/dark.png'
 
-export const CardInfo = ({ id, results }) => {
-  const state = UseFetch(results)
-  const { loading, data } = state;
+export const CardInfo = () => {
 
-
+  const{pokemon,selectedPokemon,getData,getDataId} = useContext(PokeContext);
   const loadElement = e => {
     switch (e) {
       case 'grass': return grass;
@@ -73,9 +72,9 @@ export const CardInfo = ({ id, results }) => {
     }
   }
 
+  console.log('CARD INFO',selectedPokemon);
 
   return (
-    loading &&
     <Container pos="absolute" align="right">
       <Box bg="brand.light"
         w="32rem"
@@ -85,33 +84,33 @@ export const CardInfo = ({ id, results }) => {
         align="center"
       >
         <Image
-          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id}.png`}
+          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${selectedPokemon.id}.png`}
           boxSize={["4rem", "6rem", "8rem", "16rem"]}
           ml="2rem"
           pt="-10rem"
 
         />
         <VStack>
-          <Text align="center" fontSize="sm" fontWeight="600" color="brand.tertiary">{`#${id}`}</Text>
-          <Text align="center" fontSize="xl" fontWeight="600" textTransform="capitalize">{results.name}</Text>
+          <Text align="center" fontSize="sm" fontWeight="600" color="brand.tertiary">{`#${selectedPokemon.id}`}</Text>
+          <Text align="center" fontSize="xl" fontWeight="600" textTransform="capitalize">{selectedPokemon.name}</Text>
           <HStack>
-            {results.types.map(x => <Image src={loadElement(x.type.name)} objectFit="cover" boxSize="2.5rem" />)}
+            {selectedPokemon.types.map(x => <Image src={loadElement(x.type.name)} objectFit="cover" boxSize="2.5rem" />)}
           </HStack>
           <Text align="center" fontSize="lg" fontWeight="600" color="brand.tertiary" opacity="0.6" letterSpacing="1px" textTransform="uppercase" >Abilities</Text>
           <HStack>
-            {results.abilities.map(x => <Box bg="brand.transparent" p="0.5rem" w="auto" borderRadius="xl" textTransform="capitalize">{x.ability.name}</Box>)}
+            {selectedPokemon.abilities.map(x => <Box bg="brand.transparent" p="0.5rem" w="auto" borderRadius="xl" textTransform="capitalize">{x.ability.name}</Box>)}
           </HStack>
           <HStack pt="2rem" >
             <Text fontSize="lg" fontWeight="600" color="brand.tertiary" opacity="0.6" letterSpacing="1px" textTransform="uppercase" px="4rem">Height</Text>
             <Text fontSize="lg" fontWeight="600" color="brand.tertiary" opacity="0.6" letterSpacing="1px" textTransform="uppercase" px="4rem">Weight</Text>
           </HStack>
           <HStack>
-            <Box bg="brand.transparent" p="0.5rem" w="12rem" borderRadius="xl" color="brand.black">{results.height} m</Box>
-            <Box bg="brand.transparent" p="0.5rem" w="12rem" borderRadius="xl" color="brand.black">{results.weight} kg</Box>
+            <Box bg="brand.transparent" p="0.5rem" w="12rem" borderRadius="xl" color="brand.black">{selectedPokemon.height} m</Box>
+            <Box bg="brand.transparent" p="0.5rem" w="12rem" borderRadius="xl" color="brand.black">{selectedPokemon.weight} kg</Box>
           </HStack>
             <Text align="center" fontSize="lg" fontWeight="600" color="brand.tertiary" opacity="0.6" letterSpacing="1px" textTransform="uppercase" pt="2rem">Stats</Text>
           <HStack>
-          {results.stats.map(x => 
+          {selectedPokemon.stats.map(x => 
             <Box w="auto" h="6rem" bg="brand.transparent" borderRadius="3xl" fontWeight="bold">
               <Text  fontSize="xs" color="brand.light" opacity="0.8" m="0.4rem" bg={loadColorStat(x.stat.name)} borderRadius="50%" w="2.5rem" h="2.5rem" pt="0.5rem" textTransform="uppercase">{loadStat(x.stat.name)}</Text>
               <Text pt="0.5rem">{x.base_stat}</Text>
