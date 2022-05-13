@@ -1,70 +1,106 @@
-import React, { useEffect, useState , useContext } from 'react';
-import { UseFetch } from '../../hooks/UseFetch';
-import { Container, Input, InputGroup, InputRightElement, Button, Select, HStack, VStack, Text, Box, Spinner, Flex } from '@chakra-ui/react'
+import React, { useEffect, useState, useContext } from "react";
+import {
+  Container,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Button,
+  VStack,
+  Box,
+  Spinner,
+} from "@chakra-ui/react";
 import { ArrowForwardIcon, Search2Icon, ArrowBackIcon } from "@chakra-ui/icons";
-import { Cards } from '../../components/layout/Cards';
-import { CardInfo } from '../../components/layout/CardInfo';
-import PokeContext from '../../context/Pokedex/PokeContext';
+import { Cards } from "../../components/layout/Cards";
+import { CardInfo } from "../../components/layout/CardInfo";
+import PokeContext from "../../context/Pokedex/PokeContext";
 
 export const Pokedex = () => {
-  // const [url,setUrl] = useState('https://www.pokeapi.co/api/v2/pokemon')
-  // const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10')
-  // const [allurl, setAllUrl] = useState('https://pokeapi.co/api/v2/pokemon?offset=0&limit=898')
-  // const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon/bulbasaur')
-  // let state = UseFetch(url)
-  // let allstate = UseFetch(allurl)
-  const [filter,setFilter] = useState(0);
-  // const { loading, data } = state
-  // const { data :alldata } = allstate
-  
-  
   const [paginate, setPaginate] = useState(0);
-  const{pokemon,getData} = useContext(PokeContext);
+  const [displayPage, setDisplayPage] = useState(true);
+  const { pokemon, getData, getDataFilter } = useContext(PokeContext);
 
   useEffect(() => {
     getData(paginate);
-  }, [paginate])
+  }, [paginate]);
 
-  // const filterShearch = e =>{
-  //   setFilter(e.length)
-    
-  //   data.results = data.results.filter((element)=> element.name.includes(e.toLowerCase()))
-  //   // data.results = alldata.results.filter((element)=> element.name.includes(e.toLowerCase()))
-    
-  // }
-
-  
+  const filterSearch = (e) => {
+    if (e.length !== 0) {
+      getDataFilter(e);
+      setDisplayPage("none");
+    } else {
+      getData(paginate);
+      setDisplayPage("visibility");
+    }
+  };
 
   return (
-    <Container minWidth={["570px", "767px", "992px", "1200px"]} pt="2rem" color="brand.tertiary">
-      <InputGroup width='36rem' ml="1rem"  >
-        <Input placeholder='Search your Pokémon!' bg="brand.white" />
-        <InputRightElement children={<Search2Icon color="brand.primary" />} />
+    <Container
+      minWidth={["570px", "767px", "992px", "1200px"]}
+      color="brand.tertiary"
+    >
+      <InputGroup width="36rem" ml="1rem">
+        <Input
+          placeholder="Search your Pokémon!"
+          bg="brand.white"
+          fontSize="sm"
+          h="2rem"
+          onChange={(e) => filterSearch(e.target.value)}
+        />
+        <InputRightElement
+          children={<Search2Icon color="brand.primary" mb="0.5rem" />}
+        />
       </InputGroup>
-      <HStack spacing={3} width='36rem' my="1rem" ml="1rem" >
-        <Select variant='outline' bg="brand.light" placeholder='Type' />
-        <Select variant='outline' bg="brand.light" placeholder='Height' />
-        <Select variant='outline' bg="brand.light" placeholder='Weight' />
-      </HStack>
-      {
-        (pokemon === [])
-         ? <Spinner
-            ml="16rem"
-            mt="8rem"
-            thickness='4px'
-            emptyColor='gray.200'
-            color='brand.primary'
-            size='xl'
-          />
-          :
-          <HStack pos="absolute">
-              <Box>
-                <Cards results={pokemon}/>
-                <Button h="2rem" mt="1rem" ml="1rem" variant='outline' colorScheme='teal' leftIcon={<ArrowBackIcon />} onClick={() => setPaginate(paginate-10) } disabled={(paginate <= 0 ? true : false)}>Prev</Button>
-                <Button h="2rem" mt="1rem" ml="1rem" variant='outline' colorScheme='teal' rightIcon={<ArrowForwardIcon />} onClick={() =>setPaginate(paginate+10)}>Next</Button>
+      {/* <HStack spacing={2} width='36rem' my="0.5rem" ml="1rem" >
+        <Select variant='outline' bg="brand.light" placeholder='Type' fontSize="sm" h="2rem" />
+        <Select variant='outline' bg="brand.light" placeholder='Height' fontSize="sm" h="2rem" />
+        <Select variant='outline' bg="brand.light" placeholder='Weight' fontSize="sm" h="2rem" />
+      </HStack> */}
+      {pokemon === [] ? (
+        <Spinner
+          ml="16rem"
+          mt="8rem"
+          thickness="4px"
+          emptyColor="gray.200"
+          color="brand.primary"
+          size="xl"
+        />
+      ) : (
+        <>
+          <VStack pos="absolute" align="start">
+            <Box>
+              <Cards results={pokemon} />
+              <Box display={displayPage}>
+                <Button
+                  h="2rem"
+                  mt="1rem"
+                  ml="1rem"
+                  variant="outline"
+                  colorScheme="teal"
+                  leftIcon={<ArrowBackIcon />}
+                  onClick={() => setPaginate(paginate - 10)}
+                  disabled={paginate <= 0 ? true : false}
+                >
+                  Prev
+                </Button>
+                <Button
+                  h="2rem"
+                  mt="1rem"
+                  ml="1rem"
+                  variant="outline"
+                  colorScheme="teal"
+                  rightIcon={<ArrowForwardIcon />}
+                  onClick={() => setPaginate(paginate + 10)}
+                >
+                  Next
+                </Button>
               </Box>
-          </HStack>
-      }
+            </Box>
+          </VStack>
+          <VStack align="end">
+            <CardInfo />
+          </VStack>
+        </>
+      )}
     </Container>
-  )
-}
+  );
+};
