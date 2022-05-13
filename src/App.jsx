@@ -16,7 +16,11 @@ function App() {
   return (
     <PokeState> 
     <ChakraProvider theme={theme}>
-      <Box bg="brand.background" width="100%" height="100vh"> 
+      <Box 
+       bg="brand.background"
+       width="100%" 
+       h="100vh"
+       > 
       <Navbar />
         <Router>
           <Routes>

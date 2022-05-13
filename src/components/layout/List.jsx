@@ -7,9 +7,7 @@ import PokeContext from '../../context/Pokedex/PokeContext';
 export const List = ({ url }) => {
     const state = UseFetch(url)
     const { loading, data } = state
-    const [changed,setChanged] = useState(false);
-    const{pokemon,selectedPokemon,getData,getDataId} = useContext(PokeContext);
-    // loading ? console.log('loadingList') : console.log('Desde List', data)
+    const{getDataId} = useContext(PokeContext);
 
     const sortOrder = (order) => {
         if (order < 10) {
@@ -27,10 +25,10 @@ export const List = ({ url }) => {
             <HStack>
                 <Box>
                 <Button boxShadow="lg"
-                    h={["2rem", "3rem", "4rem", "5rem"]}
+                    h={["2rem", "2rem", "3rem", "4rem"]}
                     w={["12rem", "16rem", "24rem", "36rem"]}
                     px="2rem"
-                    py="0.5rem"
+                    
                     borderRadius="2xl"
                     bg="brand.light"
                     key={data.id}
@@ -39,10 +37,8 @@ export const List = ({ url }) => {
                     onClick={()=> getDataId(data.id)}
                 >
                     <HStack>
-                        {/* <Image src={'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/' + sortOrder(data.id) + '.png'}
-                     boxSize="5rem" /> */}
                         <Image src={data.sprites.front_default}
-                            boxSize={["2rem", "3rem", "4rem", "5rem"]}
+                            boxSize={["2rem", "2rem", "3rem", "4rem"]}
                             pos="absolute"
                             left="1rem" />
                         <VStack pos="absolute" left={["3rem", "3rem", "4rem", "6rem"]}>
@@ -57,14 +53,6 @@ export const List = ({ url }) => {
                     </HStack>
                 </Button>
                 </Box>
-                    {/* <Box pos="absolute" left="40rem" top="2rem" >{(
-                        changed &&
-                       <CardInfo
-                            key={sortOrder(data.id)}
-                            id={sortOrder(data.id)}
-                            results={data} /> 
-                        )}
-                    </Box> */}
             </HStack>
         </Flex>
     )

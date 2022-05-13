@@ -22,15 +22,26 @@ const PokeState = (props) => {
     });
   };
 
-  const getDataId = async (id=1) => {
+  const getDataId = async (value) => {
     const resp = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${id}`
+      `https://pokeapi.co/api/v2/pokemon/${value}`
     );
-    console.log('id',id)
     dispatch({
       type: 'GET_POKEMONID',
       payload: resp.data
     });
+};
+
+const getDataFilter = async (value) => {
+  const resp = await axios.get(
+    `https://pokeapi.co/api/v2/pokemon?offset=0&limit=880`
+);
+let filter = resp.data.results.filter((element)=> element.name.includes(value.toLowerCase()))
+  console.log('getDataFilter',resp.data.results.filter((element)=> element.name.includes(value.toLowerCase())))
+  dispatch({
+    type: 'GET_POKEMONNAME',
+    payload: filter.slice(0,10) //Solo se deben mostrar 10 para no romper el formato.
+  });
 };
 
   return (
@@ -40,6 +51,7 @@ const PokeState = (props) => {
         selectedPokemon: state.selectedPokemon,
         getData,
         getDataId,
+        getDataFilter
       }}
     >
       {props.children}
