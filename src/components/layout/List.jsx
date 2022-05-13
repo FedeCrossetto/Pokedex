@@ -1,12 +1,14 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import { UseFetch } from '../../hooks/UseFetch'
 import { Box, Image, Text, HStack, VStack, Button, Flex ,Container} from '@chakra-ui/react'
 import { CardInfo } from './CardInfo'
+import PokeContext from '../../context/Pokedex/PokeContext';
 
 export const List = ({ url }) => {
     const state = UseFetch(url)
     const { loading, data } = state
     const [changed,setChanged] = useState(false);
+    const{pokemon,selectedPokemon,getData,getDataId} = useContext(PokeContext);
     // loading ? console.log('loadingList') : console.log('Desde List', data)
 
     const sortOrder = (order) => {
@@ -17,10 +19,6 @@ export const List = ({ url }) => {
         } else {
             return order
         }
-    }
-
-    const sendInfoCard = () =>{
-         setChanged(!changed);
     }
 
     return (
@@ -38,7 +36,7 @@ export const List = ({ url }) => {
                     key={data.id}
                     textTransform="capitalize"
                     mt="0.7rem"
-                    onClick={()=>sendInfoCard()}
+                    onClick={()=> getDataId(data.id)}
                 >
                     <HStack>
                         {/* <Image src={'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/' + sortOrder(data.id) + '.png'}
@@ -59,14 +57,14 @@ export const List = ({ url }) => {
                     </HStack>
                 </Button>
                 </Box>
-                    <Box pos="absolute" left="40rem" top="2rem" >{(
+                    {/* <Box pos="absolute" left="40rem" top="2rem" >{(
                         changed &&
                        <CardInfo
                             key={sortOrder(data.id)}
                             id={sortOrder(data.id)}
                             results={data} /> 
                         )}
-                    </Box>
+                    </Box> */}
             </HStack>
         </Flex>
     )

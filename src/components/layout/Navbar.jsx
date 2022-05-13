@@ -18,8 +18,8 @@ export const Navbar = () => {
   const Links = [
     { name: "Home", href: "/", icon: "akar-icons:home" },
     { name: "Pokedex", href: "/pokedex", icon: "icon-park-outline:game-console-one" },
-    { name: "Games", href: "", icon: "iconoir:pokeball" },
-    { name: "News", href: "", icon: "akar-icons:map" }
+    { name: "Games", href: "#!", icon: "iconoir:pokeball" },
+    { name: "News", href: "#!", icon: "akar-icons:map" }
   ];
 
 
@@ -33,7 +33,6 @@ export const Navbar = () => {
         boxShadow={!display && "xl"}
         alignItems="center"
         justifyContent="space-between"
-        // pos="fixed"
         pos="absolute"
         my="1rem"
         px="2rem"

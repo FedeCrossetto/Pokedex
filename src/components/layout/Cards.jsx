@@ -1,10 +1,11 @@
 import React from 'react'
 import { List } from './List'
 import { Container, Stack, HStack, Flex } from '@chakra-ui/react'
+import { CardInfo } from './CardInfo'
 
 
 export const Cards = ({ results }) => {
-   console.log('Desde cards recibí',results);
+  //  console.log('Desde cards recibí',results);
   return (
     <Container>
       {results.map(x =>
@@ -14,6 +15,7 @@ export const Cards = ({ results }) => {
           url={x.url} />
       )
       )}
+      {/* <CardInfo /> */}
     </Container>
   )
 }
