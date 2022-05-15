@@ -1,5 +1,5 @@
 import React from "react";
-import { Container,Grid,GridItem,HStack,SimpleGrid} from "@chakra-ui/react";
+import { Container,SimpleGrid} from "@chakra-ui/react";
 import {GamesInfo} from "../../components/layout/GamesInfo";
 
 export const Games = () => {
@@ -40,8 +40,7 @@ export const Games = () => {
   ];
   return (
     <Container minWidth={["570px", "767px", "992px", "1200px"]} px="0" pb="4rem">
-      <SimpleGrid   columns={[2,2,3,4]} gap={3} >
-        {/* <GridItem colSpan={2}   /> */}   
+      <SimpleGrid   columns={[2,2,3,4]} gap={8} >
       {ListGames.map((x) => (
         <GamesInfo key={x.id} data={x} />
         ))}

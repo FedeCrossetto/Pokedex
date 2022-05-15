@@ -1,12 +1,12 @@
-import React,{useState,useEffect,useContext} from 'react'
-import { UseFetch } from '../../hooks/UseFetch'
-import { Box, Image, Text, HStack, VStack, Button, Flex ,Container} from '@chakra-ui/react'
-import { CardInfo } from './CardInfo'
+import React,{useContext} from 'react';
+import { UseFetch } from '../../hooks/UseFetch';
+import { Box, Image, Text, HStack, VStack, Button, Flex} from '@chakra-ui/react';
 import PokeContext from '../../context/Pokedex/PokeContext';
 
 export const List = ({ url }) => {
     const state = UseFetch(url)
     const { loading, data } = state
+
     const{getDataId} = useContext(PokeContext);
 
     const sortOrder = (order) => {
@@ -27,8 +27,7 @@ export const List = ({ url }) => {
                 <Button boxShadow="lg"
                     h={["2rem", "2rem", "3rem", "4rem"]}
                     w={["12rem", "16rem", "24rem", "36rem"]}
-                    px="2rem"
-                    
+                    px="2rem"    
                     borderRadius="2xl"
                     bg="brand.light"
                     key={data.id}
