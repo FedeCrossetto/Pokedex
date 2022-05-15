@@ -16,7 +16,7 @@ export const Navbar = () => {
   const [display, changeDisplay] = useState(false);
 
   const Links = [
-    { name: "Home", href: "/", icon: "akar-icons:home" },
+    { name: "Home", href: "/pokedex", icon: "akar-icons:home" },
     { name: "Pokedex", href: "/pokedex", icon: "icon-park-outline:game-console-one" },
     { name: "Games", href: "/games", icon: "iconoir:pokeball" },
     { name: "News", href: "#!", icon: "akar-icons:map" }

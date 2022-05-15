@@ -37,6 +37,7 @@ export const Pokedex = () => {
     <Container
       minWidth={["570px", "767px", "992px", "1200px"]}
       color="brand.tertiary"
+      h="100vh"
     >
       <InputGroup width="36rem" ml="1rem">
         <Input
@@ -50,11 +51,6 @@ export const Pokedex = () => {
           children={<Search2Icon color="brand.primary" mb="0.5rem" />}
         />
       </InputGroup>
-      {/* <HStack spacing={2} width='36rem' my="0.5rem" ml="1rem" >
-        <Select variant='outline' bg="brand.light" placeholder='Type' fontSize="sm" h="2rem" />
-        <Select variant='outline' bg="brand.light" placeholder='Height' fontSize="sm" h="2rem" />
-        <Select variant='outline' bg="brand.light" placeholder='Weight' fontSize="sm" h="2rem" />
-      </HStack> */}
       {pokemon === [] ? (
         <Spinner
           ml="16rem"
@@ -68,7 +64,7 @@ export const Pokedex = () => {
         <>
           <VStack pos="absolute" align="start">
             <Box>
-              <Cards results={pokemon} />
+              <Cards  key={pokemon} results={pokemon} />
               <Box display={displayPage}>
                 <Button
                   h="2rem"
@@ -97,7 +93,7 @@ export const Pokedex = () => {
             </Box>
           </VStack>
           <VStack align="end">
-            <CardInfo />
+            <CardInfo/>
           </VStack>
         </>
       )}

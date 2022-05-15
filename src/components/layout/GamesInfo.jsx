@@ -5,18 +5,12 @@ import {
   Text,
   HStack,
   VStack,
-  Button,
-  Flex,
-  Container,
-  Link,
-  GridItem,
-  Grid,
+  Link
 } from "@chakra-ui/react";
 import { BsDownload } from "react-icons/bs";
 
 export const GamesInfo = (data) => {
   const { name, category, date, image, url } = data.data;
-  // console.log('data',data);
   return (
 
         <Box
@@ -26,6 +20,7 @@ export const GamesInfo = (data) => {
           px="2rem"
           borderRadius="xl"
           outline="1px solid rgba(178,178,178, .25)"
+          bg="brand.light"
         >
           <VStack>
             <Image pt="1rem" src={image} borderRadius="3xl" boxSize={["4rem", "6rem", "8rem", "10rem"]} />

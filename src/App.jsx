@@ -19,7 +19,7 @@ function App() {
       <Box 
        bg="brand.background"
        width="100%" 
-       h="100vh"
+       h="auto"
        > 
       <Navbar />
         <Router>
